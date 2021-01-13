@@ -1,0 +1,10 @@
+[package]
+authors = ["Radim Janoš"]
+edition = "2018"
+name = "yewban"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+yew = "0.17"
