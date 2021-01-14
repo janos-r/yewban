@@ -1,0 +1,27 @@
+body {
+  background-color: gray;
+}
+
+.grid-container {
+  display: grid;
+  background-color: gold;
+  grid-template-columns: repeat(19, 1fr);
+  --size: 90vmin;
+  width: var(--size);
+  height: var(--size);
+  box-sizing: border-box;
+  /* padding: 10px; */
+}
+
+.grid-item {
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+.grid-item:hover {
+  background-image: url("static/stone.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.75;
+  background-position: center;
+  background-color: gray;
+}
