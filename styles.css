@@ -13,15 +13,17 @@ body {
   /* padding: 10px; */
 }
 
-.grid-item {
+.grid-item, .grid-item-with-stone {
   border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
-.grid-item:hover {
+.grid-item:hover, .grid-item-with-stone {
   background-image: url("static/stone.png");
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 0.75;
   background-position: center;
-  background-color: gray;
+}
+
+.grid-item:hover {
+  opacity: 0.75;
 }
