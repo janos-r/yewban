@@ -4,17 +4,20 @@ body {
 
 .grid-container {
   display: grid;
-  background-color: gold;
+  background-image: url("static/board.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   grid-template-columns: repeat(19, 1fr);
   --size: 90vmin;
   width: var(--size);
   height: var(--size);
   box-sizing: border-box;
-  /* padding: 10px; */
+  padding: 5px;
 }
 
 .grid-item-white, .grid-item-black, .grid-item-white-stone, .grid-item-black-stone {
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  /* border: 1px solid rgba(0, 0, 0, 0.8); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
