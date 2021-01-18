@@ -1,15 +1,31 @@
+use std::ops::Not;
 use yew::prelude::*;
+
+#[derive(Clone, Copy)]
+pub enum Color {
+    White,
+    Black,
+}
+impl Not for Color {
+    type Output = Self;
+    fn not(self) -> Self::Output {
+        match self {
+            Color::White => Color::Black,
+            Color::Black => Color::White,
+        }
+    }
+}
 
 #[derive(Clone)]
 struct Cell {
-    filled: bool,
+    color: Option<Color>,
 }
 impl Cell {
     fn new() -> Self {
-        Self { filled: false }
+        Self { color: None }
     }
-    fn fill(&mut self) {
-        self.filled = true;
+    fn fill(&mut self, color: Color) {
+        self.color = Some(color);
     }
 }
 
@@ -20,6 +36,7 @@ pub enum Msg {
 pub struct Board {
     link: ComponentLink<Self>,
     cells: Vec<Cell>,
+    turn: Color,
 }
 impl Component for Board {
     type Message = Msg;
@@ -31,6 +48,7 @@ impl Component for Board {
         Self {
             link,
             cells: vec![Cell::new(); size.pow(2)],
+            turn: Color::Black,
         }
     }
 
@@ -38,10 +56,11 @@ impl Component for Board {
         match msg {
             Msg::FillCell(id) => {
                 let cell = self.cells.get_mut(id).unwrap();
-                if cell.filled {
+                if cell.color.is_some() {
                     false
                 } else {
-                    cell.fill();
+                    cell.fill(self.turn);
+                    self.turn = !self.turn;
                     true
                 }
             }
@@ -54,10 +73,11 @@ impl Component for Board {
 
     fn view(&self) -> Html {
         let cells = self.cells.iter().enumerate().map(|(id, cell)| {
-            let class = if cell.filled {
-                "grid-item-with-stone"
-            } else {
-                "grid-item"
+            let class = match (&cell.color, self.turn) {
+                (Some(Color::White), _) => "grid-item-white-stone",
+                (Some(Color::Black), _) => "grid-item-black-stone",
+                (None, Color::White) => "grid-item-white",
+                (None, Color::Black) => "grid-item-black",
             };
             html! {<div class=class onclick=self.link.callback(move |_| Msg::FillCell(id)) />}
         });

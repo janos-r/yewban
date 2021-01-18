@@ -13,17 +13,21 @@ body {
   /* padding: 10px; */
 }
 
-.grid-item, .grid-item-with-stone {
+.grid-item-white, .grid-item-black, .grid-item-white-stone, .grid-item-black-stone {
   border: 1px solid rgba(0, 0, 0, 0.8);
-}
-
-.grid-item:hover, .grid-item-with-stone {
-  background-image: url("static/stone.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.grid-item:hover {
+.grid-item-white:hover, .grid-item-white-stone {
+  background-image: url("static/white.png");
+}
+
+.grid-item-black:hover, .grid-item-black-stone {
+  background-image: url("static/black.png");
+}
+
+.grid-item-white:hover, .grid-item-black:hover {
   opacity: 0.75;
 }
