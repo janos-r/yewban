@@ -21,7 +21,7 @@ body {
 }
 
 .grid-item-white:hover, .grid-item-white-stone {
-  background-image: url("static/white.png");
+  background-image: url("static/white-shell.png");
 }
 
 .grid-item-black:hover, .grid-item-black-stone {

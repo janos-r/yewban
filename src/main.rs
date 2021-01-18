@@ -73,7 +73,7 @@ impl Component for Board {
 
     fn view(&self) -> Html {
         let cells = self.cells.iter().enumerate().map(|(id, cell)| {
-            let class = match (&cell.color, self.turn) {
+            let class = match (cell.color, self.turn) {
                 (Some(Color::White), _) => "grid-item-white-stone",
                 (Some(Color::Black), _) => "grid-item-black-stone",
                 (None, Color::White) => "grid-item-white",
