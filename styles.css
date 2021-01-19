@@ -13,7 +13,7 @@ body {
   width: var(--size);
   height: var(--size);
   box-sizing: border-box;
-  padding: 5px;
+  padding: calc(var(--size) / 90);
 }
 
 .grid-item-white, .grid-item-black, .grid-item-white-stone, .grid-item-black-stone {
