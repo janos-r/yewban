@@ -1,6 +1,76 @@
 # Yewban
-A simple frontend in Rust for a goban.
 
-## Static files
-The folder /static and its contents are copied via trunk automatically to /dist thanks to: \
-index.html: `<link data-trunk rel="copy-dir" href="path/to/images-dir"/>`
+A simple frontend in Rust🦀️ for a goban (go game board).
+
+## Install
+
+### install the build tools
+
+```
+cargo install trunk wasm-bindgen-cli
+```
+
+- Trunk is really amazing. At the time of writing it is recommended ony in the non-stable version of the yew documentation. Trunk mentions that in the future, the `wasm-bindgen-cli` package will be installed as part of trunk.
+
+### install the rust wasm toolchain
+
+```
+rustup target add wasm32-unknown-unknown
+```
+
+- Otherwise `trunk build` won't go through.
+
+## Development
+
+### Build
+
+```
+trunk build
+```
+- This creates the `/dist` folder. Under the hood in also runs `cargo build` that creates the `/target` folder. So you can still normally use cargo's check, build or clippy for checking code. 
+- #### Static files:
+  The folder `/static` and its contents are copied via trunk automatically to `/dist` thanks to this line in `index.html`:\
+  "`<link data-trunk rel="copy-dir" href="static"/>`"
+
+### Build, view and rebuild code on the fly
+
+```
+trunk serve
+```
+
+## Sharing the result
+
+If you want to run the html directly, for example on a different system, just launching index.html from `./dist/` won't work!
+
+The resulted folder needs to be served:
+
+- To cut the total size, get a clean output folder (if previous builds were made). This deletes the `./dist` folder.
+
+  ```
+  trunk clean
+  ```
+
+- make a new optimized build:
+
+  ```
+  trunk build --release
+  ```
+
+- take the content of `./dist/` and serve it with any of these:
+
+  - rust tool:
+
+    ```
+    miniserve ./dist --index index.html
+    ```
+
+  - npm (nodejs) tool:
+
+    ```
+    http-server ./dist
+    ```
+
+  - usually present by default on linux (run from inside the folder):
+    ```
+    python3 -m http.server
+    ```
