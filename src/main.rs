@@ -1,42 +1,22 @@
-use std::ops::Not;
+use goban::{
+    pieces::stones::Color,
+    rules::{GobanSizes, Move, Player, JAPANESE},
+};
+use goban::{pieces::util::coord::one_to_2dim, rules::game::Game};
 use yew::prelude::*;
-
-#[derive(Clone, Copy)]
-pub enum Color {
-    White,
-    Black,
-}
-impl Not for Color {
-    type Output = Self;
-    fn not(self) -> Self::Output {
-        match self {
-            Color::White => Color::Black,
-            Color::Black => Color::White,
-        }
-    }
-}
-
-#[derive(Clone)]
-struct Cell {
-    color: Option<Color>,
-}
-impl Cell {
-    fn new() -> Self {
-        Self { color: None }
-    }
-    fn fill(&mut self, color: Color) {
-        self.color = Some(color);
-    }
-}
 
 pub enum Msg {
     FillCell(usize),
 }
 
+fn to_move(id: usize) -> Move {
+    let m = one_to_2dim((19, 19), id);
+    Move::Play(m.0, m.1)
+}
+
 pub struct Board {
     link: ComponentLink<Self>,
-    cells: Vec<Cell>,
-    turn: Color,
+    game: Game,
 }
 impl Component for Board {
     type Message = Msg;
@@ -44,23 +24,18 @@ impl Component for Board {
 
     fn create(_props: Self::Properties, link: ComponentLink<Self>) -> Self {
         // changing this size requires to also change the grid-template-columns in the CSS
-        let size: usize = 19;
-        Self {
-            link,
-            cells: vec![Cell::new(); size.pow(2)],
-            turn: Color::Black,
-        }
+        let size = GobanSizes::Nineteen;
+        let rule = JAPANESE;
+        let game = Game::new(size, rule);
+        Self { link, game }
     }
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Msg::FillCell(id) => {
-                let cell = self.cells.get_mut(id).unwrap();
-                if cell.color.is_some() {
+                if self.game.try_play(to_move(id)).is_err() {
                     false
                 } else {
-                    cell.fill(self.turn);
-                    self.turn = !self.turn;
                     true
                 }
             }
@@ -72,12 +47,14 @@ impl Component for Board {
     }
 
     fn view(&self) -> Html {
-        let cells = self.cells.iter().enumerate().map(|(id, cell)| {
-            let class = match (cell.color, self.turn) {
-                (Some(Color::White), _) => "grid-item-white-stone",
-                (Some(Color::Black), _) => "grid-item-black-stone",
-                (None, Color::White) => "grid-item-white",
-                (None, Color::Black) => "grid-item-black",
+        let turn: Player = self.game.turn();
+        let game_cells: Vec<Color> = self.game.goban().raw();
+        let cells = game_cells.iter().enumerate().map(|(id, color)| {
+            let class = match (color, turn) {
+                (Color::White, _) => "grid-item-white-stone",
+                (Color::Black, _) => "grid-item-black-stone",
+                (Color::None, Player::White) => "grid-item-white",
+                (Color::None, Player::Black) => "grid-item-black",
             };
             html! {<div class=class onclick=self.link.callback(move |_| Msg::FillCell(id)) />}
         });
