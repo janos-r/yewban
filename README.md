@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="assets/logo.png" width="60%" />
+</p>
+
 # Yewban
 
 A simple frontend in Rust🦀️ for a goban (go game board).
@@ -40,8 +44,6 @@ trunk serve
 
 ## Sharing the result
 
-If you want to run the html directly, for example on a different system, just launching `index.html` from `./dist/` won't work!
-
 - To cut the total size, get a clean output folder (if previous builds were made). This deletes the `./dist` folder.
 
   ```
@@ -53,7 +55,7 @@ If you want to run the html directly, for example on a different system, just la
   ```
   trunk build --release
   ```
-If you need to use the `index.html` directly (for example in a link on your web), you have to change the 3 addresses for the .css, .js and .wasm. Otherwise by default, it is searching for them in root.
+If you want to run the html directly, for example on a different system, just launching `index.html` from `./dist/` won't work! If you need to use the `index.html` directly (for example in a link on your web), you have to change the 3 addresses for the .css, .js and .wasm inside. Otherwise by default it is searching for them in root.
 
 But the simplest way is to serve the folder:
 
