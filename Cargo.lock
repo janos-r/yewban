@@ -351,9 +351,9 @@ dependencies = [
 
 [[package]]
 name = "goban"
-version = "0.16.0"
+version = "0.16.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9dd4b1a1f1896095b242b60e8c7dc59a2dc3f96fd2fd2a6ba4aeeb372f5ba039"
+checksum = "aa51272aafcae03a69824c36f84ea1abc62225441277dcde516717d0d863b966"
 dependencies = [
  "ahash",
  "arrayvec",

@@ -48,20 +48,27 @@ impl Component for Board {
 
     fn view(&self) -> Html {
         let turn: Player = self.game.turn();
+        let prisoners: (u32, u32) = self.game.prisoners();
         let game_cells: Vec<Color> = self.game.goban().raw();
         let cells = game_cells.iter().enumerate().map(|(id, color)| {
             let class = match (color, turn) {
-                (Color::White, _) => "grid-item-white-stone",
-                (Color::Black, _) => "grid-item-black-stone",
-                (Color::None, Player::White) => "grid-item-white",
-                (Color::None, Player::Black) => "grid-item-black",
+                (Color::White, _) => "board-item-white-stone",
+                (Color::Black, _) => "board-item-black-stone",
+                (Color::None, Player::White) => "board-item-white",
+                (Color::None, Player::Black) => "board-item-black",
             };
             html! {<div class=class onclick=self.link.callback(move |_| Msg::FillCell(id)) />}
         });
 
         html! {
             <div class="grid-container">
-                {for cells}
+                <div class="grid-item-board-container">
+                    {for cells}
+                </div>
+                <div class="grid-item-panel-container">
+                    <div class="panel-item-info-black">{prisoners.0} {" captures"}</div>
+                    <div class="panel-item-info-white">{prisoners.1} {" captures"}</div>
+                </div>
             </div>
         }
     }

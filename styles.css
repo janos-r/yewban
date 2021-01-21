@@ -2,7 +2,20 @@ body {
   background-color: gray;
 }
 
+/*
+  The main gird has 2 items - board, panel
+*/
+
 .grid-container {
+  display: inline-grid;
+  grid-template-columns: auto auto;
+  grid-gap: 20px;
+  padding: 20px;
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.grid-item-board-container {
   display: grid;
   background-image: url("static/board.png");
   background-size: contain;
@@ -16,21 +29,57 @@ body {
   padding: calc(var(--size) / 90);
 }
 
-.grid-item-white, .grid-item-black, .grid-item-white-stone, .grid-item-black-stone {
+.grid-item-panel-container {
+  display: grid;
+  height: 90vh;
+  grid-row-gap: 1px;
+  grid-template-rows: repeat(10, 1fr);
+}
+
+/* 
+  board items
+*/
+
+.board-item-white, .board-item-black, .board-item-white-stone, .board-item-black-stone {
   /* border: 1px solid rgba(0, 0, 0, 0.8); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
 
-.grid-item-white:hover, .grid-item-white-stone {
+.board-item-white:hover, .board-item-white-stone {
   background-image: url("static/white-shell.png");
 }
 
-.grid-item-black:hover, .grid-item-black-stone {
+.board-item-black:hover, .board-item-black-stone {
   background-image: url("static/black.png");
 }
 
-.grid-item-white:hover, .grid-item-black:hover {
+.board-item-white:hover, .board-item-black:hover {
   opacity: 0.75;
+}
+
+/*
+  panel items
+*/
+
+.panel-item-info-black, .panel-item-info-white {
+  border-radius: 25px;
+  padding: 20px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.panel-item-info-black {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgba(256, 256, 256, 0.8);
+}
+
+.panel-item-info-white {
+  background-color: rgba(256, 256, 256, 0.5);
+  grid-row-start: 4;
+  grid-row-end: 5;
 }

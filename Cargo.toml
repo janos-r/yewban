@@ -5,5 +5,5 @@ name = "yewban"
 version = "0.1.0"
 
 [dependencies]
-goban = "0.16.0"
+goban = "0.16.1"
 yew = "0.17"
