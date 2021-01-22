@@ -31,7 +31,7 @@ body {
 
 .grid-item-panel-container {
   display: grid;
-  height: 90vh;
+  height: 90vmin;
   grid-row-gap: 1px;
   grid-template-rows: repeat(10, 1fr);
 }
