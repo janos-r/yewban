@@ -1,7 +1,8 @@
 <p align="center">
     <img src="assets/logo.png" width="60%" />
-    <a href="https://radim.xyz/yewban/"><h2 align="center">🚀️Running example on my web🚀️<h2></a>
 </p>
+
+## [🚀️Running example on my web](https://radim.xyz/yewban/)
 
 # Yewban
 
