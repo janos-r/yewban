@@ -3,6 +3,7 @@
 </p>
 
 ## [🚀️Running example on my web](https://radim.xyz/yewban/)
+## [📜️ Article on my web](https://radim.xyz/project/yewban/)
 
 # Yewban
 
